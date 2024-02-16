@@ -1,4 +1,4 @@
-import { blurhashToGradient } from '../src';
+import { blurhashToCssGradient } from '../src';
 
 const exampleCases = [
   [
@@ -39,14 +39,14 @@ const exampleCases = [
   ],
 ];
 
-describe('blurhashToGradient', () => {
+describe('blurhashToCssGradient', () => {
   it('returns a valid CSS gradient for a given blurhash', () => {
     // Example blurhash
     const blurhash = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
     const columns = 4;
     const rows = 3;
 
-    const result = blurhashToGradient(blurhash, columns, rows);
+    const result = blurhashToCssGradient(blurhash, columns, rows);
 
     // Basic checks to ensure the output is in the expected format
     expect(result).toContain('radial-gradient');
@@ -56,7 +56,7 @@ describe('blurhashToGradient', () => {
 
   for (const [blurhash, expected, columns, rows] of exampleCases) {
     it(`returns the expected CSS gradient for blurhash "${blurhash}" [${columns}, ${rows}]`, () => {
-      const result = blurhashToGradient(
+      const result = blurhashToCssGradient(
         `${blurhash}`,
         columns as number,
         rows as number
@@ -67,8 +67,8 @@ describe('blurhashToGradient', () => {
 
   it('returns different gradients for different column and row values', () => {
     const blurhash = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
-    const result1 = blurhashToGradient(blurhash, 4, 3);
-    const result2 = blurhashToGradient(blurhash, 5, 4);
+    const result1 = blurhashToCssGradient(blurhash, 4, 3);
+    const result2 = blurhashToCssGradient(blurhash, 5, 4);
 
     expect(result1).not.toEqual(result2);
   });
@@ -76,10 +76,10 @@ describe('blurhashToGradient', () => {
   it('handles edge cases gracefully', () => {
     // Edge case: very low column/row values
     const blurhash = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
-    expect(() => blurhashToGradient(blurhash, 1, 1)).not.toThrow();
+    expect(() => blurhashToCssGradient(blurhash, 1, 1)).not.toThrow();
 
     // Edge case: invalid blurhash
     const invalidBlurhash = 'invalid';
-    expect(() => blurhashToGradient(invalidBlurhash, 4, 3)).toThrow();
+    expect(() => blurhashToCssGradient(invalidBlurhash, 4, 3)).toThrow();
   });
 });

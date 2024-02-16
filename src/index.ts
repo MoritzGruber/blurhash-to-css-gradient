@@ -282,7 +282,7 @@ export function pixelsToCssGradients(
  * string can be used in CSS stylesheets or inline styles to render a gradient approximation of
  * the original image encoded by the blurhash.
  */
-export function blurhashToGradient(
+export function blurhashToCssGradient(
   blurhash: string,
   columns = 4,
   rows = 3
